@@ -4,7 +4,8 @@ class UserPost extends StatefulWidget {
   final String image;
   final String channelName;
   final String title;
-  UserPost({this.image, this.channelName, this.title});
+  final String dp;
+  UserPost({this.image, this.channelName, this.title, this.dp});
   @override
   _UserPostState createState() => _UserPostState();
 }
@@ -40,17 +41,27 @@ class _UserPostState extends State<UserPost> {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  CircleAvatar(),
+                  Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: NetworkImage(widget.dp), fit: BoxFit.cover),
+                    ),
+                  ),
+                  SizedBox(width: 5),
                   Text(widget.channelName),
                 ],
               ),
-              Icon(Icons.more),
+              Icon(Icons.more_vert),
             ],
           ),
         ),
         Container(
           child: Image(
-            fit: BoxFit.fill,
+            fit: BoxFit.contain,
             image: NetworkImage(widget.image),
           ),
         ),
@@ -61,12 +72,14 @@ class _UserPostState extends State<UserPost> {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  Icon(Icons.favorite),
-                  Icon(Icons.comment),
-                  Icon(Icons.share),
+                  Icon(Icons.favorite_border),
+                  SizedBox(width: 5),
+                  Icon(Icons.mode_comment_outlined),
+                  SizedBox(width: 5),
+                  Icon(Icons.send),
                 ],
               ),
-              Icon(Icons.save),
+              Icon(Icons.storefront),
             ],
           ),
         ),

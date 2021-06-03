@@ -30,9 +30,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: Icon(Icons.camera),
+        leading: Icon(Icons.camera_alt),
         title: Text("Instagram"),
-        actions: <Widget>[Icon(Icons.share)],
+        actions: <Widget>[Icon(Icons.send)],
       ),
       body: _childrenWidgets[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -57,11 +57,7 @@ class _HomePageState extends State<HomePage> {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.verified_user_rounded),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.save),
+            icon: Icon(Icons.account_circle_sharp),
             label: '',
           ),
         ],

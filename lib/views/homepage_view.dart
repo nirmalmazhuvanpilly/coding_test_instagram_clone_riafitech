@@ -22,32 +22,48 @@ class _HomePageViewState extends State<HomePageView> {
     homeData = await api.homeDetails();
   }
 
+  Future<void> refresh() async {
+    print("Refreshed");
+    homeData = await api.homeDetails();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: fetchHomeData(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return ListView.builder(
-              itemCount: homeData.homePageModel.length,
-              itemBuilder: (context, index) {
-                return UserPost(
-                  image: homeData.homePageModel
-                      .elementAt(index)
-                      .highThumbnail
-                      .toString(),
-                  channelName: homeData.homePageModel
-                      .elementAt(index)
-                      .channelname
-                      .toString(),
-                  title:
-                      homeData.homePageModel.elementAt(index).title.toString(),
-                );
-              },
-            );
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        });
+    return RefreshIndicator(
+      onRefresh: refresh,
+      child: FutureBuilder(
+          future: fetchHomeData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: homeData.homePageModel.length,
+                itemBuilder: (context, index) {
+                  return UserPost(
+                    image: homeData.homePageModel
+                        .elementAt(index)
+                        .highThumbnail
+                        .toString(),
+                    channelName: homeData.homePageModel
+                        .elementAt(index)
+                        .channelname
+                        .toString(),
+                    title: homeData.homePageModel
+                        .elementAt(index)
+                        .title
+                        .toString(),
+                    dp: homeData.homePageModel
+                        .elementAt(index)
+                        .highThumbnail
+                        .toString(),
+                  );
+                },
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          }),
+    );
   }
 }

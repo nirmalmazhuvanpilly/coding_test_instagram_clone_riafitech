@@ -15,7 +15,6 @@ class HomeApi {
 
       HomePageModelList homePageModelList = HomePageModelList.fromJson(body);
       // print(homePageModelList.homePageModel[0].id);
-      // homePageModel = HomePageModel.fromJson(body);
 
       return homePageModelList;
     } else {
