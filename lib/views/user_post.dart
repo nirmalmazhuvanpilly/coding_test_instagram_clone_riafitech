@@ -2,35 +2,30 @@ import 'package:flutter/material.dart';
 
 class UserPost extends StatefulWidget {
   final String image;
-  UserPost({this.image});
+  final String channelName;
+  final String title;
+  UserPost({this.image, this.channelName, this.title});
   @override
   _UserPostState createState() => _UserPostState();
 }
 
 class _UserPostState extends State<UserPost> {
-  String title =
-      "Easy acrylic painting lesson | City Walk Girl in the Rain | Umbrella Art Easy acrylic painting lesson | City Walk Girl in the Rain | Umbrella Art";
-
   String firstHalf;
-
-  String secondHalf;
 
   bool flag;
 
   @override
   void initState() {
+    flag = true;
     _check();
     super.initState();
   }
 
   void _check() {
-    if (title.length > 50) {
-      firstHalf = title.substring(0, 50);
-      secondHalf = title.substring(50, title.length);
-      flag = true;
+    if (widget.title.length > 50) {
+      firstHalf = widget.title.substring(0, 50);
     } else {
-      firstHalf = title;
-      secondHalf = "";
+      firstHalf = widget.title;
     }
   }
 
@@ -46,7 +41,7 @@ class _UserPostState extends State<UserPost> {
               Row(
                 children: <Widget>[
                   CircleAvatar(),
-                  Text("Varun Aditya"),
+                  Text(widget.channelName),
                 ],
               ),
               Icon(Icons.more),
@@ -106,7 +101,7 @@ class _UserPostState extends State<UserPost> {
                         },
                         child: Text("Varun Aditya $firstHalf ...more"),
                       )
-                    : Text("Varun Aditya $title"),
+                    : Text("Varun Aditya ${widget.title}"),
               ),
             ],
           ),

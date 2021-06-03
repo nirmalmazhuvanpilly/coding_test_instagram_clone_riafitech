@@ -36,6 +36,12 @@ class _HomePageViewState extends State<HomePageView> {
                       .elementAt(index)
                       .highThumbnail
                       .toString(),
+                  channelName: homeData.homePageModel
+                      .elementAt(index)
+                      .channelname
+                      .toString(),
+                  title:
+                      homeData.homePageModel.elementAt(index).title.toString(),
                 );
               },
             );
