@@ -10,7 +10,7 @@ class HomePageView extends StatefulWidget {
 
 class _HomePageViewState extends State<HomePageView> {
   HomeApi api = new HomeApi();
-  HomePageModel homeData = new HomePageModel();
+  HomePageModelList homeData = new HomePageModelList();
 
   @override
   void initState() {
@@ -28,11 +28,15 @@ class _HomePageViewState extends State<HomePageView> {
         future: fetchHomeData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            print(homeData.channelname.toString());
             return ListView.builder(
-              itemCount: 10,
+              itemCount: homeData.homePageModel.length,
               itemBuilder: (context, index) {
-                return UserPost();
+                return UserPost(
+                  image: homeData.homePageModel
+                      .elementAt(index)
+                      .highThumbnail
+                      .toString(),
+                );
               },
             );
           } else {

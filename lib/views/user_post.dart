@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class UserPost extends StatefulWidget {
+  final String image;
+  UserPost({this.image});
   @override
   _UserPostState createState() => _UserPostState();
 }
@@ -54,8 +56,7 @@ class _UserPostState extends State<UserPost> {
         Container(
           child: Image(
             fit: BoxFit.fill,
-            image: NetworkImage(
-                "https://i.ytimg.com/vi/yNx5co12pIA/maxresdefault.jpg"),
+            image: NetworkImage(widget.image),
           ),
         ),
         Padding(

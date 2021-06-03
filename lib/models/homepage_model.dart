@@ -1,16 +1,3 @@
-// To parse this JSON data, do
-//
-//     final homePageModel = homePageModelFromJson(jsonString);
-
-import 'dart:convert';
-
-List<HomePageModel> homePageModelFromJson(String str) =>
-    List<HomePageModel>.from(
-        json.decode(str).map((x) => HomePageModel.fromJson(x)));
-
-String homePageModelToJson(List<HomePageModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class HomePageModel {
   HomePageModel({
     this.id,
@@ -19,7 +6,6 @@ class HomePageModel {
     this.highThumbnail,
     this.lowThumbnail,
     this.mediumThumbnail,
-    this.tags,
   });
 
   String id;
@@ -28,7 +14,6 @@ class HomePageModel {
   String highThumbnail;
   String lowThumbnail;
   String mediumThumbnail;
-  List<dynamic> tags;
 
   factory HomePageModel.fromJson(Map<String, dynamic> json) => HomePageModel(
         id: json["id"] == null ? null : json["id"],
@@ -40,9 +25,6 @@ class HomePageModel {
             json["low thumbnail"] == null ? null : json["low thumbnail"],
         mediumThumbnail:
             json["medium thumbnail"] == null ? null : json["medium thumbnail"],
-        tags: json["tags"] == null
-            ? null
-            : List<dynamic>.from(json["tags"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -52,6 +34,17 @@ class HomePageModel {
         "high thumbnail": highThumbnail == null ? null : highThumbnail,
         "low thumbnail": lowThumbnail == null ? null : lowThumbnail,
         "medium thumbnail": mediumThumbnail == null ? null : mediumThumbnail,
-        "tags": tags == null ? null : List<dynamic>.from(tags.map((x) => x)),
       };
+}
+
+class HomePageModelList {
+  List<HomePageModel> homePageModel;
+  HomePageModelList({this.homePageModel});
+
+  factory HomePageModelList.fromJson(List<dynamic> parsedJson) {
+    // ignore: deprecated_member_use
+    List<HomePageModel> homePageModel = new List<HomePageModel>();
+    homePageModel = parsedJson.map((i) => HomePageModel.fromJson(i)).toList();
+    return new HomePageModelList(homePageModel: homePageModel);
+  }
 }
