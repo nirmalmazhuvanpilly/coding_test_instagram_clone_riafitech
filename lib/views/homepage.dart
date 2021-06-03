@@ -8,16 +8,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  final List<Widget> _childrenWidgets = [
+    HomePageView(),
+    Container(),
+    Container(),
+    Container(),
+    Container(),
+    Container(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    int _selectedIndex = 0;
-
-    void _onItemTapped(int index) {
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -25,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         title: Text("Instagram"),
         actions: <Widget>[Icon(Icons.share)],
       ),
-      body: HomePageView(),
+      body: _childrenWidgets[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedFontSize: 12,
